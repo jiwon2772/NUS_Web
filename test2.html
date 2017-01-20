@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>NUS_Web</title>
+    <script type="text/javascript" src="go-debug.js"></script>
+    <script type="text/javascript" src="go.js"></script>
+    <script>
+    function goIntro() {
+
+    var diagram = new go.Diagram("myDiagramDiv");
+    diagram.model = new go.GraphLinksModel(
+      [{ key: "Hello" },   // two node data, in an Array
+       { key: "World!" }],
+      [{ from: "Hello", to: "World!"}]  // one link, in an Array
+    );
+    }
+    </script>
+  </head>
+  <body onload="goIntro()">
+    <div id="myDiagramDiv" style="width:400px; height:150px; background-color: #DAE4E4;"></div>
+    
+  </body>
+</html>
