@@ -171,22 +171,28 @@
         $(go.Shape,  // the "from" arrowhead
           new go.Binding("fromArrow", "fromArrow")),
         $(go.Shape,  // the "to" arrowhead
-          new go.Binding("toArrow", "toArrow"))
-        // $(go.Panel, "Auto",
-        //   new go.Binding("visible", "isSelected").ofObject(),
-        //   $(go.Shape, "RoundedRectangle",  // the link shape
-        //     { fill: "#F8F8F8", stroke: null }),
-        //   $(go.TextBlock,
-        //     {
-        //       textAlign: "center",
-        //       font: "10pt helvetica, arial, sans-serif",
-        //       stroke: "#919191",
-        //       margin: 2,
-        //       minSize: new go.Size(10, NaN),
-        //       editable: false
-        //     },
-        //     new go.Binding("text").makeTwoWay())
-        //)
+          new go.Binding("toArrow", "toArrow")),
+        $(go.TextBlock,   // the label text
+          {
+           textAlign: "center",
+           font: "bold 13pt helvetica, arial, sans-serif",
+           stroke:"blue",
+           margin: 8,
+           segmentOffset: new go.Point(NaN, NaN),
+           editable: true  // enable in-place editing
+           },
+           new go.Binding("text","multi")),
+          $(go.Panel, "Auto",
+          new go.Binding("visible", "isSelected").ofObject(),
+          $(go.Shape, "RoundedRectangle",  // the link shape
+            { fill: "#F8F8F8", stroke: null }),
+          $(go.TextBlock,
+            {
+              minSize: new go.Size(NaN, NaN),
+              editable: false
+            },
+            new go.Binding("text").makeTwoWay())
+        )
       );
 
     load();  // load an initial diagram from some JSON text
@@ -225,15 +231,15 @@
               $(go.Shape,  // the "to" arrowhead
                 new go.Binding("toArrow", "toArrow"))),
           model: new go.GraphLinksModel([  // specify the contents of the Palette
-            { text: "Entity", figure: "RoundedRectangle", fill: "lightyellow", size: "150 70", type: "E"},
-            { text: "Relationship", figure: "Diamond", fill: "lightskyblue", type: "R" },
-            { text: "Attribute", figure: "Ellipse", fill: "#00AD5F", type: "A"}
+            { text: "Entity", figure: "RoundedRectangle", fill: "lightyellow", size: "150 70"},
+            { text: "Relationship", figure: "Diamond", fill: "lightskyblue"},
+            { text: "Attribute", figure: "Ellipse", fill: "#00AD5F"}
           ], [
             // the Palette also has a disconnected Link, which the user can drag-and-drop
-            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "", fromArrow: "" },
-            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "Standard", fromArrow: ""},
-            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "DoubleFeathers", fromArrow: ""},
-            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "Standard", fromArrow: "Backward"}
+            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "", fromArrow: "", type:"r", multi:"m"},
+            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "Standard", fromArrow: "", type:"a"},
+            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "DoubleFeathers", fromArrow: "" ,type:"m"},
+            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]), toArrow: "Standard", fromArrow: "Backward", type:"k"}
           ])
         });
   }
